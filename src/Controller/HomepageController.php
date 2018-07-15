@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Episode;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -12,8 +13,10 @@ class HomepageController extends Controller
      */
     public function index()
     {
+        $episodes = $this->getDoctrine()->getRepository(Episode::class)->findAll();
+
         return $this->render('homepage/index.html.twig', [
-            'controller_name' => 'HomepageController',
+            'episodes' => $episodes,
         ]);
     }
 }
