@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Entity\Episode;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -10,9 +11,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class AppGenerateEpisodesCommand extends Command
+class AppGenerateDemoDataCommand extends Command
 {
-    protected static $defaultName = 'app:generate-episodes';
+    protected static $defaultName = 'app:generate-data';
 
     /**
      * @var EntityManagerInterface
@@ -29,30 +30,42 @@ class AppGenerateEpisodesCommand extends Command
     {
         $this
             ->setDescription('This command generate 15 episodes')
-            ->addArgument('count', InputArgument::OPTIONAL, 'Number of episodes to be created');
+            ->addArgument('nbUsers', InputArgument::OPTIONAL, 'Number of users to be created. Default value is 10')
+            ->addArgument('nbEpisodes', InputArgument::OPTIONAL, 'Number of episodes to be created. Default value is 100');
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
 
-        $count = $input->getArgument('count');
-        if ($count) {
-            $count = (int) $count;
-            if (!$count) {
+        $nbUsers = $input->getArgument('nbUsers');
+        if ($nbUsers) {
+            $nbUsers = (int) $nbUsers;
+            if (!$nbUsers) {
                 $io->error('Count argument should me a valid integer number. Pass --help to see your options.');
             }
         }
-
-        if (!$count) {
-            $count = 15;
+        if (!$nbUsers) {
+            $nbUsers = 10;
+        }
+        $nbEpisodes = $input->getArgument('nbEpisodes');
+        if ($nbEpisodes) {
+            $nbEpisodes = (int) $nbEpisodes;
+            if (!$nbEpisodes) {
+                $io->error('Count argument should me a valid integer number. Pass --help to see your options.');
+            }
+        }
+        if (!$nbEpisodes) {
+            $nbEpisodes = 100;
         }
 
         $generator = \Faker\Factory::create();
         $populator = new \Faker\ORM\Doctrine\Populator($generator, $this->entityManager);
-        $populator->addEntity(Episode::class, $count);
+        $populator->addEntity(User::class, $nbUsers);
+        $populator->addEntity(Episode::class, $nbEpisodes);
         $populator->execute();
 
-        $io->success(sprintf('%s episodes have been created!', $count));
+        $io->success(sprintf('%s episodes have been created!', $nbEpisodes));
     }
 }

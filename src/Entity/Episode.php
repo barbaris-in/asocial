@@ -26,6 +26,14 @@ class Episode
      */
     private $body;
 
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="episodes")
+     * @ORM\JoinColumn
+     */
+    private $user;
+
     public function getId()
     {
         return $this->id;
@@ -51,6 +59,30 @@ class Episode
     public function setBody(string $body): self
     {
         $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set user
+     *
+     * @param User $user
+     *
+     * @return Episode
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
 
         return $this;
     }

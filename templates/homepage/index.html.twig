@@ -8,8 +8,11 @@
 
         {% for episode in episodes %}
             <div class="episode">
-                <h2>{{ episode.title }}</h2>
+                <div><h2>{{ episode.title }}</h2> <h3>by {{ episode.user }}</h3></div>
                 <p>{{ episode.body }}</p>
+                {% for episode in episode.user.episodes %}
+                {{ episode.id }}
+                {% endfor %}
             </div>
         {% endfor %}
     </div>
