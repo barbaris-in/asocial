@@ -1,0 +1,11 @@
+User:
+    type: object
+    config:
+        description: "A user is an individual's account on Asocial that owns episodes and can make new content."
+        fields:
+            id:
+                type: "ID!"
+                description: "The user's ID."
+            username:
+                type: "String"
+                description: "The user's username."

@@ -1,0 +1,21 @@
+Query:
+    type: object
+    config:
+        description: "The query root of Asocial's GraphQL interface."
+        fields:
+            user:
+                type: "User"
+                description: "Lookup a user by username"
+                args:
+                    username:
+                        description: "The user's username"
+                        type: "String!"
+                resolve: '@=resolver("user", [args["username"]])'
+            episode:
+                type: "Episode"
+                description: "Lookup a episode by ID"
+                args:
+                    id:
+                        description: "The episode's ID"
+                        type: "ID!"
+                resolve: '@=resolver("episode", [args["id"]])'
