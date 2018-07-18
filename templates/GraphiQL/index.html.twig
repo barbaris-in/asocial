@@ -1,0 +1,6 @@
+{% extends '@OverblogGraphiQL/GraphiQL/index.html.twig' %}
+
+{% block graphql_fetcher_headers %}
+    {{ parent() }}
+    headers["Authorization"] = "Bearer {{ JWT }}";
+{% endblock graphql_fetcher_headers %}

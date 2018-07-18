@@ -1,0 +1,3 @@
+twig:
+    globals:
+        JWT: '%env(ASOCIAL_JWT)%'

@@ -1,0 +1,2 @@
+graphql_login_check:
+    path: /graphql/login_check
