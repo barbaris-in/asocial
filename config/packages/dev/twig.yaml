@@ -1,3 +1,6 @@
+parameters:
+    env(ASOCIAL_JWT): Dummy_JWT
+
 twig:
     globals:
         JWT: '%env(ASOCIAL_JWT)%'
