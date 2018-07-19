@@ -14,3 +14,4 @@ Episode:
                 description: "Body of an episode"
             user:
                 type: "User"
+                description: "Represents a creator (and owner) of an Episode."
