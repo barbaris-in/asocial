@@ -34,6 +34,11 @@ class Episode
      */
     private $user;
 
+    public function __toString()
+    {
+        return $this->title;
+    }
+
     public function getId()
     {
         return $this->id;
